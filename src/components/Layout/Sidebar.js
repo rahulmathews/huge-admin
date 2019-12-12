@@ -25,6 +25,7 @@ import {
   MdViewList,
   MdWeb,
   MdWidgets,
+  MdTitle
 } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 import {
@@ -82,6 +83,7 @@ const pageContents = [
 
 const navItems = [
   { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
+  { to: '/tile', name: 'title', exact: false, Icon: MdTitle },
   { to: '/cards', name: 'cards', exact: false, Icon: MdWeb },
   { to: '/charts', name: 'charts', exact: false, Icon: MdInsertChart },
   { to: '/widgets', name: 'widgets', exact: false, Icon: MdWidgets },

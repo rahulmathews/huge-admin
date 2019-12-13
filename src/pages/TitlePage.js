@@ -5,7 +5,7 @@ import Page from 'components/Page';
 const TitlePage = () => {
     return (
         <Page title="Title" breadcrumbs={[{ name: 'title', active: true }]}>
-
+            This is a Title Page
         </Page>
     )
 }

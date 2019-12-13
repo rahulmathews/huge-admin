@@ -97,13 +97,13 @@ const MenuPage = () => {
         Cell: (props) => (
             <span>
                 <DragStyles>
-                    <FaBars id={props.value}/>
-                    <UncontrolledTooltip
+                    <FaBars />
+                    {/* <UncontrolledTooltip
                         placement="top"
                         target={props.value}
                         >
                         View Details
-                    </UncontrolledTooltip>
+                    </UncontrolledTooltip> */}
                 </DragStyles>
             </span>
         )

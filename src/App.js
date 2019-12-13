@@ -24,6 +24,7 @@ const ProgressPage = React.lazy(() => import('pages/ProgressPage'));
 const TablePage = React.lazy(() => import('pages/TablePage'));
 const TitlePage = React.lazy(() => import('pages/TitlePage'));
 const MenuPage = React.lazy(() => import('pages/MenuPage'));
+const MenuEditPage = React.lazy(() => import('pages/MenuEditPage'));
 const TypographyPage = React.lazy(() => import('pages/TypographyPage'));
 const WidgetPage = React.lazy(() => import('pages/WidgetPage'));
 
@@ -66,6 +67,7 @@ class App extends React.Component {
                 <Route exact path="/tables" component={TablePage} />
                 <Route exact path="/title" component={TitlePage} />
                 <Route exact path="/menu" component={MenuPage} />
+                <Route exact path="/menu/edit" component={MenuEditPage} />
                 <Route exact path="/badges" component={BadgePage} />
                 <Route
                   exact

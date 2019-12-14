@@ -26,7 +26,9 @@ import {
   MdWeb,
   MdWidgets,
   MdTitle,
-  MdMenu
+  MdMenu,
+  MdDeveloperMode,
+  MdPieChart
 } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 import {
@@ -82,10 +84,14 @@ const pageContents = [
   },
 ];
 
-const navItems = [
-  { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
+const devContents = [
   { to: '/title', name: 'title', exact: false, Icon: MdTitle },
   { to: '/menu', name: 'menu', exact: false, Icon: MdMenu },
+  { to: '/section', name: 'section', exact: false, Icon: MdPieChart },
+]
+
+const navItems = [
+  { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
   { to: '/cards', name: 'cards', exact: false, Icon: MdWeb },
   { to: '/charts', name: 'charts', exact: false, Icon: MdInsertChart },
   { to: '/widgets', name: 'widgets', exact: false, Icon: MdWidgets },
@@ -95,9 +101,10 @@ const bem = bn.create('sidebar');
 
 class Sidebar extends React.Component {
   state = {
-    isOpenComponents: true,
-    isOpenContents: true,
-    isOpenPages: true,
+    isOpenComponents: false,
+    isOpenContents: false,
+    isOpenPages: false,
+    isOpenDevelopment: false,
   };
 
   handleClick = name => () => {
@@ -130,6 +137,51 @@ class Sidebar extends React.Component {
             </SourceLink>
           </Navbar>
           <Nav vertical>
+
+            {/* Development Mode Starts*/}
+
+            <NavItem
+              className={bem.e('nav-item')}
+              onClick={this.handleClick('Development')}
+            >
+              <BSNavLink className={bem.e('nav-item-collapse')}>
+                <div className="d-flex">
+                  <MdDeveloperMode className={bem.e('nav-item-icon')} />
+                  <span className="">Development</span>
+                </div>
+                <MdKeyboardArrowDown
+                  className={bem.e('nav-item-icon')}
+                  style={{
+                    padding: 0,
+                    transform: this.state.isOpenDevelopment
+                      ? 'rotate(0deg)'
+                      : 'rotate(-90deg)',
+                    transitionDuration: '0.3s',
+                    transitionProperty: 'transform',
+                  }}
+                />
+              </BSNavLink>
+            </NavItem>
+            <Collapse isOpen={this.state.isOpenDevelopment}>
+              {devContents.map(({ to, name, exact, Icon }, index) => (
+                <NavItem key={index} className={bem.e('nav-item')}>
+                  <BSNavLink
+                    id={`navItem-${name}-${index}`}
+                    className="text-uppercase"
+                    tag={NavLink}
+                    to={to}
+                    activeClassName="active"
+                    exact={exact}
+                  >
+                    <Icon className={bem.e('nav-item-icon')} />
+                    <span className="">{name}</span>
+                  </BSNavLink>
+                </NavItem>
+              ))}
+            </Collapse>
+            
+            {/* Development Mode Ends*/}
+            
             {navItems.map(({ to, name, exact, Icon }, index) => (
               <NavItem key={index} className={bem.e('nav-item')}>
                 <BSNavLink

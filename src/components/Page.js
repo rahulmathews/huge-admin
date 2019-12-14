@@ -1,13 +1,24 @@
 import React from 'react';
 import PropTypes from 'utils/propTypes';
 
+import styled from 'styled-components';
+
 import bn from 'utils/bemnames';
 
-import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Button } from 'reactstrap';
 
 import Typography from './Typography';
 
 const bem = bn.create('page');
+
+const ButtonStyles = styled.div`
+  float:right;
+  margin-bottom:1rem;
+  flex:auto;
+  display:flex;
+  justify-content:flex-end;
+  margin-right:19px
+`
 
 const Page = ({
   title,
@@ -15,6 +26,7 @@ const Page = ({
   tag: Tag,
   className,
   children,
+  button,
   ...restProps
 }) => {
   const classes = bem.b('px-3', className);
@@ -40,6 +52,15 @@ const Page = ({
               ))}
           </Breadcrumb>
         )}
+        {
+          button && (
+            <ButtonStyles>
+              <Button>
+                  {button.text}
+              </Button> 
+            </ButtonStyles>
+          )
+        }
       </div>
       {children}
     </Tag>

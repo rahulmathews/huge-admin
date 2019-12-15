@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {
     Button,
     Card,
@@ -14,10 +14,12 @@ import {
     Row,
     UncontrolledTooltip
   } from 'reactstrap';
-  import { FaBars } from 'react-icons/fa';
+import { FaBars, FaEye } from 'react-icons/fa';
+import { MdDelete, MdEdit } from 'react-icons/md';
 
 import {SketchPicker} from 'react-color';
 import {useTable} from 'react-table';
+import Switch from 'react-switch';
 import styled from 'styled-components';
 import faker from 'faker';
 
@@ -40,6 +42,13 @@ const TableStyles = styled.div`
     tr:nth-child(even) {
         background-color: #dddddd;
     }
+  }
+`
+
+const ActionStyles = styled.div`
+  width : 70px;
+  svg{
+    margin-right : 8px
   }
 `
 
@@ -90,8 +99,29 @@ function Table({ columns, data }) {
     )
 }
 
-const SectionPage = () => {
-    const columns = [{
+class SectionPage extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      checked : true
+    }
+  }
+
+  handleChange = () => {
+    const prevValue = this.state.checked;
+    this.setState({
+      checked : !prevValue
+    })
+  }
+  
+
+  componentDidMount = () => {
+
+  }
+
+  render(){
+    const columns = [
+      {
         Header: 'Drag',
         accessor: 'move',
         Cell: (props) => (
@@ -123,35 +153,80 @@ const SectionPage = () => {
       {
         Header: 'Actions',
         accessor: 'actions',
+        Cell : ({row}) => {
+          return (
+            <span>
+              <ActionStyles>
+                <FaEye className="cp" id={'ActionTooltip_View_' + row.original._id}/>
+                <UncontrolledTooltip
+                  placement="bottom"
+                  target={'ActionTooltip_View_' + row.original._id}
+                  >
+                  View Seetion
+                </UncontrolledTooltip>
+                <MdEdit className="cp" id={'ActionTooltip_Edit_' + row.original._id}/>
+                <UncontrolledTooltip
+                  placement="bottom"
+                  target={'ActionTooltip_Edit_' + row.original._id}
+                  >
+                  Edit Section
+                </UncontrolledTooltip>
+                <MdDelete className="cp" id={'ActionTooltip_Delete_' + row.original._id}/>
+                <UncontrolledTooltip
+                  placement="bottom"
+                  target={'ActionTooltip_Delete_' + row.original._id}
+                  >
+                  Delete Section
+                </UncontrolledTooltip>
+              </ActionStyles>
+            </span>
+          )
+        }
       },
       {
         Header: 'Status',
         accessor: 'status',
+        Cell : ({row}) => (
+          <Switch checked={this.state.checked}
+            onChange={() => this.handleChange()}
+            onColor="#86d3ff"
+            onHandleColor="#2693e6"
+            handleDiameter={20}
+            uncheckedIcon={false}
+            checkedIcon={false}
+            boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+            activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+            height={15}
+            width={40}
+            className="react-switch"
+            id="material-switch" />
+        )
       }
     ]
 
     let data = []
 
     for(let i = 0; i<10; i++){
-        let obj = {
-            name : faker.name.title(),
-            createdAt : faker.date.past(),
-            updatedAt : new Date(),
-            actions : 'actions',
-            status : 'Inactive'
-        }
+      let obj = {
+          _id : faker.random.uuid(),
+          name : faker.name.title(),
+          createdAt : faker.date.past(),
+          updatedAt : new Date(),
+          actions : 'actions',
+          status : 'Inactive'
+      }
 
-        data.push(obj);
+      data.push(obj);
     }
-    data.push();
-
+  
     return (
         <Page title="Section" breadcrumbs={[{ name: 'section', active: true }]} button={{text : 'Add Section'}}>
             <TableStyles>
-                <Table columns={columns} data={data} />
+                <Table columns={columns} data={data} defaultPageSize={10} />
             </TableStyles>
         </Page>
     )
+  }
 }
 
 export default SectionPage;

@@ -25,7 +25,8 @@ const TablePage = React.lazy(() => import('pages/TablePage'));
 const TitlePage = React.lazy(() => import('pages/TitlePage'));
 const MenuPage = React.lazy(() => import('pages/MenuPage'));
 const MenuEditPage = React.lazy(() => import('pages/MenuEditPage'));
-const SectionPage = React.lazy(() => import('pages/SectionPage'));
+const SectionPage = React.lazy(() => import('pages/section'));
+const SectionAddPage = React.lazy(() => import('pages/section/AddSection'));
 const TypographyPage = React.lazy(() => import('pages/TypographyPage'));
 const WidgetPage = React.lazy(() => import('pages/WidgetPage'));
 
@@ -69,7 +70,8 @@ class App extends React.Component {
                 <Route exact path="/title" component={TitlePage} />
                 <Route exact path="/menu" component={MenuPage} />
                 <Route exact path="/menu/edit" component={MenuEditPage} />
-                <Route exact path="/section" component={SectionPage} />
+                <Route exact path="/sections" component={SectionPage} />
+                <Route exact path="/sections/add" component={SectionAddPage} />
                 <Route exact path="/badges" component={BadgePage} />
                 <Route
                   exact

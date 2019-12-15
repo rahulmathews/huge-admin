@@ -52,6 +52,15 @@ const ActionStyles = styled.div`
   }
 `
 
+const ButtonStyles = styled.div`
+  float:right;
+  margin-bottom:1rem;
+  flex:auto;
+  display:flex;
+  justify-content:flex-end;
+  margin-right:19px
+`
+
 const DragStyles = styled.div`
   cursor: pointer;
   text-align: center 
@@ -105,6 +114,20 @@ class SectionPage extends Component{
     this.state = {
       checked : true
     }
+  }
+
+  AddSectionComponent = () => {
+    return (
+      <ButtonStyles>
+        <Button onClick={() => this.handleAddSection()}>
+            Add Section
+        </Button> 
+      </ButtonStyles>
+    )
+  }
+  
+  handleAddSection = (e) => {
+    this.props.history.push('sections/add')
   }
 
   handleChange = () => {
@@ -162,7 +185,7 @@ class SectionPage extends Component{
                   placement="bottom"
                   target={'ActionTooltip_View_' + row.original._id}
                   >
-                  View Seetion
+                  View Section
                 </UncontrolledTooltip>
                 <MdEdit className="cp" id={'ActionTooltip_Edit_' + row.original._id}/>
                 <UncontrolledTooltip
@@ -220,7 +243,7 @@ class SectionPage extends Component{
     }
   
     return (
-        <Page title="Section" breadcrumbs={[{ name: 'section', active: true }]} button={{text : 'Add Section'}}>
+        <Page title="Section" breadcrumbs={[{ name: 'section', active: true }]} buttonComp={this.AddSectionComponent}>
             <TableStyles>
                 <Table columns={columns} data={data} defaultPageSize={10} />
             </TableStyles>

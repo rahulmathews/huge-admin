@@ -11,22 +11,13 @@ import Typography from './Typography';
 
 const bem = bn.create('page');
 
-const ButtonStyles = styled.div`
-  float:right;
-  margin-bottom:1rem;
-  flex:auto;
-  display:flex;
-  justify-content:flex-end;
-  margin-right:19px
-`
-
 const Page = ({
   title,
   breadcrumbs,
   tag: Tag,
   className,
   children,
-  button,
+  buttonComp,
   ...restProps
 }) => {
   const classes = bem.b('px-3', className);
@@ -53,13 +44,7 @@ const Page = ({
           </Breadcrumb>
         )}
         {
-          button && (
-            <ButtonStyles>
-              <Button>
-                  {button.text}
-              </Button> 
-            </ButtonStyles>
-          )
+          buttonComp && buttonComp()
         }
       </div>
       {children}

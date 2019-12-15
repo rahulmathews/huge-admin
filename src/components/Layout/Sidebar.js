@@ -87,7 +87,7 @@ const pageContents = [
 const devContents = [
   { to: '/title', name: 'title', exact: false, Icon: MdTitle },
   { to: '/menu', name: 'menu', exact: false, Icon: MdMenu },
-  { to: '/section', name: 'section', exact: false, Icon: MdPieChart },
+  { to: '/sections', name: 'section', exact: false, Icon: MdPieChart },
 ]
 
 const navItems = [

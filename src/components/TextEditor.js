@@ -14,13 +14,20 @@ class TextEditor extends Component{
     }
 
     componentDidMount = () => {
-        const elems = document.getElementsByClassName('rdw-editor-main');
+        const editorElems = document.getElementsByClassName('rdw-editor-main');
 
-        for(let ele of elems){
+        for(let ele of editorElems){
             ele.style.height = "200px";
             ele.style.padding = "4px";
             ele.style.border = "2px solid #17b7b79e";
             ele.style['border-radius'] = "5px";
+            ele.style.width = "480px";
+        }
+
+        const toolbarElems = document.getElementsByClassName('rdw-editor-toolbar');
+
+        for(let ele of toolbarElems){
+            ele.style.width = "480px";
         }
     }
 

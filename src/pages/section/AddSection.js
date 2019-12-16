@@ -122,24 +122,21 @@ class AddSection extends Component{
                             </Col>
                         </Row>
                         <Row>
-                            <Col xl={12} lg={12} md={12}>
-                            <Form>
-                                <FormGroup>
-                                    <Label for="paragraph">Paragraph</Label>
-                                        <TextEditor placeholder="Enter Paragraph"/>
-                                </FormGroup>
-                            </Form>
-                            </Col>
-                        </Row>
-                        {/* <TextEditor /> */}
-                        <Row>
-                            <Col xl={12} lg={12} md={12}>
+                            <Col xl={6} lg={12} md={12}>
                                 <Form>
                                     <FormGroup>
                                         <Label for="title">Title</Label>
                                         <TextEditor placeholder="Enter Title"/>
                                     </FormGroup>
                                 </Form>
+                            </Col>
+                            <Col xl={6} lg={12} md={12}>
+                            <Form>
+                                <FormGroup>
+                                    <Label for="paragraph">Paragraph</Label>
+                                        <TextEditor placeholder="Enter Paragraph"/>
+                                </FormGroup>
+                            </Form>
                             </Col>
                         </Row>
                         <Row>

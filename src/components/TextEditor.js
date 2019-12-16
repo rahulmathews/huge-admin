@@ -4,7 +4,6 @@ import { EditorState, convertToRaw } from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg';
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import '../styles/components/editor.css';
 
 class TextEditor extends Component{
     constructor(props){

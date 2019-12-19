@@ -8,6 +8,8 @@ import componentQueries from 'react-component-queries';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './styles/reduction.scss';
 
+import RouterComp from './components/Router/Router';
+
 const AlertPage = React.lazy(() => import('pages/AlertPage'));
 const AuthModalPage = React.lazy(() => import('pages/AuthModalPage'));
 const BadgePage = React.lazy(() => import('pages/BadgePage'));
@@ -42,7 +44,7 @@ class App extends React.Component {
           <Switch>
             <LayoutRoute
               exact
-              path="/login"
+              path="/"
               layout={EmptyLayout}
               component={props => (
                 <AuthPage {...props} authState={STATE_LOGIN} />
@@ -59,7 +61,8 @@ class App extends React.Component {
 
             <MainLayout breakpoint={this.props.breakpoint}>
               <React.Suspense fallback={<PageSpinner />}>
-                <Route exact path="/" component={DashboardPage} />
+                <RouterComp />
+                {/* <Route exact path="/" component={DashboardPage} />
                 <Route exact path="/login-modal" component={AuthModalPage} />
                 <Route exact path="/buttons" component={ButtonPage} />
                 <Route exact path="/cards" component={CardPage} />
@@ -83,7 +86,7 @@ class App extends React.Component {
                 <Route exact path="/modals" component={ModalPage} />
                 <Route exact path="/forms" component={FormPage} />
                 <Route exact path="/input-groups" component={InputGroupPage} />
-                <Route exact path="/charts" component={ChartPage} />
+                <Route exact path="/charts" component={ChartPage} /> */}
               </React.Suspense>
             </MainLayout>
             <Redirect to="/" />

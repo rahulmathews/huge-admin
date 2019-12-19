@@ -3,7 +3,19 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 
+import AuthService from '../utils/AuthService';
+
 class AuthForm extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      username : '',
+      password : ''
+    };
+
+    this.Auth = new AuthService();
+  }
+
   get isLogin() {
     return this.props.authState === STATE_LOGIN;
   }
@@ -20,7 +32,15 @@ class AuthForm extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    this.Auth.loginUser(this.state.username, this.state.password)
   };
+
+  handleChange = event => {
+    let key = event.target.name;
+    this.setState({
+      [key] : event.target.value
+    })
+  }
 
   renderButtonText() {
     const { buttonText } = this.props;
@@ -64,11 +84,11 @@ class AuthForm extends React.Component {
         )}
         <FormGroup>
           <Label for={usernameLabel}>{usernameLabel}</Label>
-          <Input {...usernameInputProps} />
+          <Input {...usernameInputProps} name="username" value={this.state.username} onChange={(e) => {this.handleChange(e)}}/>
         </FormGroup>
         <FormGroup>
           <Label for={passwordLabel}>{passwordLabel}</Label>
-          <Input {...passwordInputProps} />
+          <Input {...passwordInputProps} name="password" value={this.state.passsword}  onChange={(e) => {this.handleChange(e)}}/>
         </FormGroup>
         {this.isSignup && (
           <FormGroup>

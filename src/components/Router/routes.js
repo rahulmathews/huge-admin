@@ -1,3 +1,5 @@
+import React from 'react';
+
 //Lazily loaded Components
 const AlertPage = React.lazy(() => import('pages/AlertPage'));
 const AuthModalPage = React.lazy(() => import('pages/AuthModalPage'));
@@ -23,7 +25,7 @@ const WidgetPage = React.lazy(() => import('pages/WidgetPage'));
 
 const routes = [
     {
-        path : '/',
+        path : '/dashboard',
         auth : true,
         exact : true,
         component : DashboardPage

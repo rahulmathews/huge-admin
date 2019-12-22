@@ -7,11 +7,7 @@ import AuthService from '../../utils/AuthService';
 class ProtectedRouter extends Component{
     constructor(props){
         super(props);
-        this.state = {
-            isAuthenticated : false
-        }
-
-        this.Auth = new AuthService();
+        this.Auth = null;
     }
 
     componentDidMount = () => {
@@ -19,12 +15,16 @@ class ProtectedRouter extends Component{
     }
 
     render(){
+        const {component : Component, ...rest} = this.props;
+
         return (
-            <Route render = {() => (
-                this.Auth.isLoggedIn ? 
-                {...this.props} : 
-                <Redirect to="/" />
-            )} />
+            <Route {...rest} render = {(props) => {
+                this.Auth = new AuthService();
+                if(this.Auth.isLoggedIn){
+                    return <Component {...props}/>; 
+                }
+                return <Redirect to="/" />
+            }} />
         )
     }
 }

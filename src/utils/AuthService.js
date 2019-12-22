@@ -9,13 +9,12 @@ dotenv.config();
 class AuthService{
     constructor(props){
 
-        console.log(process.env);
         this.token = null;
         this.sessionId = null;
         this.isLoggedIn = false;
         this.decodedToken = {};
         this.instance = null;
-        this.baseURL = process.env.REACT_APP_BASE_SERVER;
+        this.baseURL = process.env.REACT_APP_SERVER_URL;
 
         this.init();
     }
@@ -75,15 +74,9 @@ class AuthService{
     }
 
     loginUser = (username, pwd) => {
-        this.instance.post('/login', {
+        return this.instance.post('/common/login', {
             username : username,
             password : pwd
-        })
-        .then((res) => {
-            console.log(res);
-        })
-        .catch((err) => {
-            //handle errors
         })
     }
 

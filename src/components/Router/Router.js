@@ -21,7 +21,7 @@ class RouterComponent extends Component{
         return (
             routes.map((route, idx) => {
                 if(route.auth){
-                    return <ProtectedRouter key={idx} route/>
+                    return <ProtectedRouter key={idx} {...route}/>
                 }
                 else{
                     return <Route key={idx} {...route}/>

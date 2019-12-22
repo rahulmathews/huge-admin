@@ -41,6 +41,12 @@ import {
 } from 'reactstrap';
 import bn from 'utils/bemnames';
 
+import styled from 'styled-components';
+
+const CollapseStyles = styled.div `
+  margin-left : 22px
+`
+
 const sidebarBackground = {
   backgroundImage: `url("${sidebarBgImage}")`,
   backgroundSize: 'cover',
@@ -159,22 +165,24 @@ class Sidebar extends React.Component {
                 />
               </BSNavLink>
             </NavItem>
-            <Collapse isOpen={this.state.isOpenDevelopment}>
-              {devContents.map(({ to, name, Icon }, index) => (
-                <NavItem key={index} className={bem.e('nav-item')}>
-                  <BSNavLink
-                    id={`navItem-${name}-${index}`}
-                    className="text-uppercase"
-                    tag={NavLink}
-                    to={to}
-                    activeClassName="active"
-                  >
-                    <Icon className={bem.e('nav-item-icon')} />
-                    <span className="">{name}</span>
-                  </BSNavLink>
-                </NavItem>
-              ))}
-            </Collapse>
+            <CollapseStyles>
+              <Collapse isOpen={this.state.isOpenDevelopment}>
+                {devContents.map(({ to, name, Icon }, index) => (
+                  <NavItem key={index} className={bem.e('nav-item')}>
+                    <BSNavLink
+                      id={`navItem-${name}-${index}`}
+                      className="text-uppercase"
+                      tag={NavLink}
+                      to={to}
+                      activeClassName="active"
+                    >
+                      <Icon className={bem.e('nav-item-icon')} />
+                      <span className="">{name}</span>
+                    </BSNavLink>
+                  </NavItem>
+                ))}
+              </Collapse>
+            </CollapseStyles>
             
             {/* Development Mode Ends*/}
             
@@ -215,22 +223,24 @@ class Sidebar extends React.Component {
                 />
               </BSNavLink>
             </NavItem>
-            <Collapse isOpen={this.state.isOpenComponents}>
-              {navComponents.map(({ to, name, Icon }, index) => (
-                <NavItem key={index} className={bem.e('nav-item')}>
-                  <BSNavLink
-                    id={`navItem-${name}-${index}`}
-                    className="text-uppercase"
-                    tag={NavLink}
-                    to={to}
-                    activeClassName="active"
-                  >
-                    <Icon className={bem.e('nav-item-icon')} />
-                    <span className="">{name}</span>
-                  </BSNavLink>
-                </NavItem>
-              ))}
-            </Collapse>
+            <CollapseStyles>
+              <Collapse isOpen={this.state.isOpenComponents}>
+                {navComponents.map(({ to, name, Icon }, index) => (
+                  <NavItem key={index} className={bem.e('nav-item')}>
+                    <BSNavLink
+                      id={`navItem-${name}-${index}`}
+                      className="text-uppercase"
+                      tag={NavLink}
+                      to={to}
+                      activeClassName="active"
+                    >
+                      <Icon className={bem.e('nav-item-icon')} />
+                      <span className="">{name}</span>
+                    </BSNavLink>
+                  </NavItem>
+                ))}
+              </Collapse>
+            </CollapseStyles>
 
             <NavItem
               className={bem.e('nav-item')}
@@ -254,22 +264,24 @@ class Sidebar extends React.Component {
                 />
               </BSNavLink>
             </NavItem>
-            <Collapse isOpen={this.state.isOpenContents}>
-              {navContents.map(({ to, name, Icon }, index) => (
-                <NavItem key={index} className={bem.e('nav-item')}>
-                  <BSNavLink
-                    id={`navItem-${name}-${index}`}
-                    className="text-uppercase"
-                    tag={NavLink}
-                    to={to}
-                    activeClassName="active"
-                  >
-                    <Icon className={bem.e('nav-item-icon')} />
-                    <span className="">{name}</span>
-                  </BSNavLink>
-                </NavItem>
-              ))}
-            </Collapse>
+            <CollapseStyles>
+              <Collapse isOpen={this.state.isOpenContents}>
+                {navContents.map(({ to, name, Icon }, index) => (
+                  <NavItem key={index} className={bem.e('nav-item')}>
+                    <BSNavLink
+                      id={`navItem-${name}-${index}`}
+                      className="text-uppercase"
+                      tag={NavLink}
+                      to={to}
+                      activeClassName="active"
+                    >
+                      <Icon className={bem.e('nav-item-icon')} />
+                      <span className="">{name}</span>
+                    </BSNavLink>
+                  </NavItem>
+                ))}
+              </Collapse>
+            </CollapseStyles>
 
             <NavItem
               className={bem.e('nav-item')}
@@ -293,22 +305,24 @@ class Sidebar extends React.Component {
                 />
               </BSNavLink>
             </NavItem>
-            <Collapse isOpen={this.state.isOpenPages}>
-              {pageContents.map(({ to, name, Icon }, index) => (
-                <NavItem key={index} className={bem.e('nav-item')}>
-                  <BSNavLink
-                    id={`navItem-${name}-${index}`}
-                    className="text-uppercase"
-                    tag={NavLink}
-                    to={to}
-                    activeClassName="active"
-                  >
-                    <Icon className={bem.e('nav-item-icon')} />
-                    <span className="">{name}</span>
-                  </BSNavLink>
-                </NavItem>
-              ))}
-            </Collapse>
+            <CollapseStyles>
+              <Collapse isOpen={this.state.isOpenPages}>
+                {pageContents.map(({ to, name, Icon }, index) => (
+                  <NavItem key={index} className={bem.e('nav-item')}>
+                    <BSNavLink
+                      id={`navItem-${name}-${index}`}
+                      className="text-uppercase"
+                      tag={NavLink}
+                      to={to}
+                      activeClassName="active"
+                    >
+                      <Icon className={bem.e('nav-item-icon')} />
+                      <span className="">{name}</span>
+                    </BSNavLink>
+                  </NavItem>
+                ))}
+              </Collapse>
+            </CollapseStyles>
           </Nav>
         </div>
       </aside>

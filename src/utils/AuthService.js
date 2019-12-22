@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import localStorage from 'local-storage'
 import decode from 'jwt-decode';
 import axios from 'axios';

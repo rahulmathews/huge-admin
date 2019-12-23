@@ -30,6 +30,7 @@ button,
   -webkit-font-smoothing: antialiased;
   font-family: Poppins, Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: $font-weight-normal;
+  font-size: 14px;
 }
 
 .cr-app {
@@ -39,4 +40,15 @@ button,
   padding: 0;
   margin: 0;
   overflow-x: hidden;
+}
+
+.cp{
+  cursor: pointer;
+}
+
+.add-section{
+  .card-header{
+    font-weight: 600;
+    color: mediumblue;
+  }
 }

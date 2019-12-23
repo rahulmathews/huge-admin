@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'utils/propTypes';
 
+import styled from 'styled-components';
+
 import bn from 'utils/bemnames';
 
-import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Button } from 'reactstrap';
 
 import Typography from './Typography';
 
@@ -15,6 +17,7 @@ const Page = ({
   tag: Tag,
   className,
   children,
+  buttonComp,
   ...restProps
 }) => {
   const classes = bem.b('px-3', className);
@@ -23,7 +26,7 @@ const Page = ({
     <Tag className={classes} {...restProps}>
       <div className={bem.e('header')}>
         {title && typeof title === 'string' ? (
-          <Typography type="h1" className={bem.e('title')}>
+          <Typography type="h4" className={bem.e('title')}>
             {title}
           </Typography>
         ) : (
@@ -40,6 +43,9 @@ const Page = ({
               ))}
           </Breadcrumb>
         )}
+        {
+          buttonComp && buttonComp()
+        }
       </div>
       {children}
     </Tag>

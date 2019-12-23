@@ -3,7 +3,24 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 
+import localStorage from 'local-storage';
+import {withRouter} from 'react-router-dom';
+import NotificationSystem from 'react-notification-system';
+
+import AuthService from '../utils/AuthService';
+import { NOTIFICATION_SYSTEM_STYLE } from 'utils/constants';
+
 class AuthForm extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      username : '',
+      password : ''
+    };
+
+    this.Auth = new AuthService();
+  }
+
   get isLogin() {
     return this.props.authState === STATE_LOGIN;
   }
@@ -20,7 +37,34 @@ class AuthForm extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    this.Auth.loginUser(this.state.username, this.state.password)
+    .then((res) => {
+      this.notificationSystem.addNotification({
+        message: 'Login Successfull',
+        level: 'success',
+      });
+
+      //Set Local Storage
+      localStorage.set('token', res.data.token);
+      localStorage.set('session_id', res.data.sessionId);
+      localStorage.set('user_id', res.data.userId);
+
+      this.props.history.push('/dashboard');
+    })
+    .catch((err) => {
+      this.notificationSystem.addNotification({
+        message: 'Login Failed',
+        level: 'error',
+      });
+    })
   };
+
+  handleChange = event => {
+    let key = event.target.name;
+    this.setState({
+      [key] : event.target.value
+    })
+  }
 
   renderButtonText() {
     const { buttonText } = this.props;
@@ -64,11 +108,11 @@ class AuthForm extends React.Component {
         )}
         <FormGroup>
           <Label for={usernameLabel}>{usernameLabel}</Label>
-          <Input {...usernameInputProps} />
+          <Input {...usernameInputProps} name="username" value={this.state.username} onChange={(e) => {this.handleChange(e)}}/>
         </FormGroup>
         <FormGroup>
           <Label for={passwordLabel}>{passwordLabel}</Label>
-          <Input {...passwordInputProps} />
+          <Input {...passwordInputProps} name="password" value={this.state.passsword}  onChange={(e) => {this.handleChange(e)}}/>
         </FormGroup>
         {this.isSignup && (
           <FormGroup>
@@ -107,6 +151,14 @@ class AuthForm extends React.Component {
         </div>
 
         {children}
+
+        {/* Notification */}
+        <NotificationSystem
+          ref={notificationSystem =>
+            (this.notificationSystem = notificationSystem)
+          }
+          style={NOTIFICATION_SYSTEM_STYLE}
+        />
       </Form>
     );
   }
@@ -148,4 +200,4 @@ AuthForm.defaultProps = {
   onLogoClick: () => {},
 };
 
-export default AuthForm;
+export default withRouter(AuthForm);

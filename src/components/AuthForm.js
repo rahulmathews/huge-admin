@@ -15,7 +15,8 @@ class AuthForm extends React.Component {
     super(props);
     this.state = {
       username : '',
-      password : ''
+      password : '',
+      confirmPassword : ''
     };
 
     this.Auth = new AuthService();
@@ -37,26 +38,68 @@ class AuthForm extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.Auth.loginUser(this.state.username, this.state.password)
-    .then((res) => {
+    if(!this.state.username){
       this.notificationSystem.addNotification({
-        message: 'Login Successfull',
-        level: 'success',
-      });
-
-      //Set Local Storage
-      localStorage.set('token', res.data.token);
-      localStorage.set('session_id', res.data.sessionId);
-      localStorage.set('user_id', res.data.userId);
-
-      this.props.history.push('/dashboard');
-    })
-    .catch((err) => {
-      this.notificationSystem.addNotification({
-        message: 'Login Failed',
+        message: 'User Name should not be Empty',
         level: 'error',
       });
-    })
+      return ;
+    }
+
+    if(!this.state.password){
+      this.notificationSystem.addNotification({
+        message: 'Password should not be Empty',
+        level: 'error',
+      });
+      return ;
+    }
+
+    if(this.props.authState === STATE_SIGNUP){
+      if(!(this.state.password === this.state.confirmPassword)){
+        this.notificationSystem.addNotification({
+          message: 'Password and Confirm Password should match',
+          level: 'error',
+        });
+        return ;
+      }
+
+      this.Auth.registerUser(this.state.username, this.state.password)
+      .then((res) => {
+        this.notificationSystem.addNotification({
+          message: 'Registration Successfull',
+          level: 'success',
+        });
+        this.props.history.push('/');
+      })
+      .catch((err) => {
+        this.notificationSystem.addNotification({
+          message: 'Registration Failed',
+          level: 'error',
+        });
+      })
+    }
+    else{
+      this.Auth.loginUser(this.state.username, this.state.password)
+      .then((res) => {
+        this.notificationSystem.addNotification({
+          message: 'Login Successfull',
+          level: 'success',
+        });
+
+        //Set Local Storage
+        localStorage.set('token', res.data.token);
+        localStorage.set('session_id', res.data.sessionId);
+        localStorage.set('user_id', res.data.userId);
+
+        this.props.history.push('/dashboard');
+      })
+      .catch((err) => {
+        this.notificationSystem.addNotification({
+          message: 'Login Failed',
+          level: 'error',
+        });
+      })
+    }
   };
 
   handleChange = event => {
@@ -117,7 +160,7 @@ class AuthForm extends React.Component {
         {this.isSignup && (
           <FormGroup>
             <Label for={confirmPasswordLabel}>{confirmPasswordLabel}</Label>
-            <Input {...confirmPasswordInputProps} />
+            <Input {...confirmPasswordInputProps} value={this.state.confirmPassword}/>
           </FormGroup>
         )}
         <FormGroup check>
@@ -182,10 +225,10 @@ AuthForm.propTypes = {
 AuthForm.defaultProps = {
   authState: 'LOGIN',
   showLogo: true,
-  usernameLabel: 'Email',
+  usernameLabel: 'User Name',
   usernameInputProps: {
-    type: 'email',
-    placeholder: 'your@email.com',
+    type: 'string',
+    placeholder: 'your name',
   },
   passwordLabel: 'Password',
   passwordInputProps: {

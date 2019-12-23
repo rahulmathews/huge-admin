@@ -14,6 +14,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, process.env.ABSOLUTE_STATIC_PATH, '../index.html'));
 });
 
+app.get('/admin', (req, res) => {
+  res.redirect('/');
+})
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, '0.0.0.0', (err) => {

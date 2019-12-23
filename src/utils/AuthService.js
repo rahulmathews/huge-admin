@@ -68,8 +68,11 @@ class AuthService{
     }
 
     //Api Interactions
-    registerUser = () => {
-
+    registerUser = (username, pwd) => {
+        return this.instance.post('/common/register', {
+            username : username,
+            password : pwd
+        })
     }
 
     loginUser = (username, pwd) => {

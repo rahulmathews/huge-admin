@@ -160,7 +160,7 @@ class AuthForm extends React.Component {
         {this.isSignup && (
           <FormGroup>
             <Label for={confirmPasswordLabel}>{confirmPasswordLabel}</Label>
-            <Input {...confirmPasswordInputProps} value={this.state.confirmPassword}/>
+            <Input {...confirmPasswordInputProps} name="confirmPassword" value={this.state.confirmPassword} onChange={(e) => {this.handleChange(e)}}/>
           </FormGroup>
         )}
         <FormGroup check>
